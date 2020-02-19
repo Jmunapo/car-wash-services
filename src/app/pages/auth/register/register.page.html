@@ -1,0 +1,99 @@
+<ion-content>
+  <section *ngIf="signing_up" class="loader ion-no-margin">
+    <div class="loading ion-text-center">
+      <p><ion-spinner name="crescent"></ion-spinner> Signing Up...</p>
+    </div>
+  </section>
+  <section *ngIf="!signing_up" class="main ion-no-margin">
+    <div class="form ion-padding">
+      <ion-card class="ion-no-margin">
+        <ion-card-header>
+          <h2>Creat a new account</h2>
+        </ion-card-header>
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm.value)">
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Full Name</ion-label>
+              <ion-input
+                formControlName="fullname"
+                placeholder="John Doe"
+                type="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Email</ion-label>
+              <ion-input
+                formControlName="email"
+                placeholder="you@domain.com"
+                type="email"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Password</ion-label>
+              <ion-input
+                formControlName="password"
+                placeholder="Create a new password"
+                type="password"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-checkbox
+                formControlName="accept"
+                checked="false"
+                slot="start"
+              ></ion-checkbox>
+              <ion-label class="links ion-text-wrap">
+                <p>
+                  I agree to the
+                  <a href="http://tnmservices/user-agreement">User Agreement</a
+                  >, and acknowledged the
+                  <a href="http://tnmservices/privacy-policy">Privacy Policy</a>
+                </p>
+              </ion-label>
+            </ion-item>
+
+            <ion-button
+              fill="clear"
+              class="ion-no-margin signin-btn"
+              expand="full"
+              [disabled]="!signUpForm.valid"
+              type="submit"
+            >
+              Sign Up
+            </ion-button>
+          </ion-list>
+        </form>
+      </ion-card>
+
+      <ion-grid class="btn-grid">
+        <ion-row>
+          <ion-col size="12">
+            <ion-button
+              routerLink="/auth/login"
+              routerDirection="backward"
+              class="default"
+              fill="clear"
+              expand="full"
+            >
+              Returning User? Sign In
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </section>
+
+  <section *ngIf="always_false">
+    <h2>Please verify your email</h2>
+    <p>We sent a verification email to email_here.</p>
+    <p>Click the link in the email to verify your email.</p>
+
+    <hr />
+
+    <p>If the email didn't arrive, please contact new.user@tnmservices.co.uk</p>
+
+    <ion-button>Sign up with a differnt email</ion-button>
+    <!--Alert: Are u sure you want to use diff email? Cancel | Yes remember form data-->
+  </section>
+</ion-content>

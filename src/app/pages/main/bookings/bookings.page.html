@@ -1,0 +1,78 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-title>Bookings</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <section *ngIf="loading" class="loader ion-no-margin">
+    <div class="loading ion-text-center">
+      <img width="30px" src="assets/img/loader.svg" />
+      <span *ngIf="action">{{action}}</span>
+    </div>
+  </section>
+
+  <section *ngIf="!loading" class="main ion-margin">
+    <div *ngIf="bookings.length">
+      <ion-card class="ion-padding" *ngFor="let book of bookings">
+        <h3 class="ion-no-margin ion-text-uppercase cus-title date">
+          {{book.date.day}}, {{book.date.date}} {{book.date.month}}
+          {{book.date.year}} <span class="cus-slot">@{{book.date.slot}}</span>
+        </h3>
+
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <h3 class="service-name">
+              {{(book.frequency === "Week")? "A Week of" : ""}}
+              <span class="ion-text-capitalize ">{{book.service_name}}</span>
+            </h3>
+          </ion-label>
+          <span slot="end" class="cus-title">£{{book.amount}}</span>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-icon size="small" name="pin" slot="start"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <p>
+              {{book.location.formatted_address}}
+            </p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item
+          class="vehicle-item"
+          lines="none"
+          *ngFor="let v of book.vehicles"
+        >
+          <ion-icon size="small" name="md-cars" slot="start"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <p>
+              {{v.model_make}}
+              <span class="p_number">{{v.plate_number}}</span>
+            </p>
+          </ion-label>
+        </ion-item>
+
+        <hr color="light" />
+        <ion-item lines="none">
+          <ion-icon
+            slot="start"
+            [color]="(!book.status || book.status === 'UPCOMMING') ? 'success' : 'danger'"
+            name="ios-time"
+          ></ion-icon>
+          <ion-label class="status"
+            >{{book.status ? book.status : "UPCOMMING"}}</ion-label
+          >
+          <ion-button (click)="openActionSheet(book)" fill="clear" slot="end">
+            <ion-icon class="more" slot="icon-only" name="md-apps"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <div *ngIf="!bookings.length" class="empty">
+      <div class="info ion-text-center">
+        <h1>You have not yet booked</h1>
+      </div>
+    </div>
+  </section>
+</ion-content>

@@ -1,0 +1,34 @@
+{
+    "plans": [
+        {
+            "name": "Basic",
+            "features": [
+                "Hand Wash Shamboo",
+                "Tyre Dress & Rim Shine",
+                "Windows Exterior & Interior",
+                "Deodorised"
+            ],
+            "price": 60
+        },
+        {
+            "name": "Standard",
+            "features": [
+                "Hand Wash Shamboo",
+                "Tyre Dress & Rim Shine",
+                "Windows Exterior & Interior",
+                "Deodorised"
+            ],
+            "price": 100
+        },
+        {
+            "name": "Gold",
+            "features": [
+                "Hand Wash Shamboo",
+                "Tyre Dress & Rim Shine",
+                "Windows Exterior & Interior",
+                "Deodorised"
+            ],
+            "price": 250
+        }
+    ]
+}

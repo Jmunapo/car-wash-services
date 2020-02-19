@@ -1,0 +1,73 @@
+.input-title {
+  margin-top: 20px !important;
+}
+.user-value {
+  text-transform: capitalize;
+}
+
+.val-title {
+  color: var(--ion-color-light);
+  font-size: 16px;
+}
+
+ion-item {
+  margin-bottom: 10px;
+  border-radius: 6px;
+  --min-height: 56px;
+}
+
+.user-cars {
+  width: 100%;
+}
+.add_name {
+  color: var(--ion-color-primary);
+  font-weight: bold;
+}
+
+.v_name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.p_number {
+  display: inline-block;
+  border: 1px solid var(--ion-color-medium);
+  border-style: double;
+  border-radius: 6px;
+  padding: 0 5px;
+}
+
+.days-card {
+  width: 100%;
+}
+
+.month-slider {
+  color: var(--ion-color-medium);
+  font-weight: 400;
+}
+
+ion-card-content.add-v {
+  padding-top: 5px;
+  padding-bottom: 46px;
+}
+
+.brd-primary {
+  border: 1px solid var(--ion-color-success);
+}
+
+// .time-slot-input {
+//   --border-radius: 6px;
+//   --inner-padding-start: 5px;
+// }
+
+.price-btn {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--ion-color-medium);
+}
+
+.plan-name {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: medium;
+}

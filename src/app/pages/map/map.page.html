@@ -1,0 +1,69 @@
+<ion-content fullscreen="true">
+  <google-map
+    height="100%"
+    width="100%"
+    [zoom]="zoom"
+    [center]="center"
+    [options]="options"
+    (mapClick)="mapPin($event)"
+  >
+    <map-marker
+      *ngIf="showMarker"
+      #markerElem
+      [position]="marker.position"
+      [options]="marker.options"
+      (mapDragend)="getLocationInfo($event, true)"
+    >
+    </map-marker>
+  </google-map>
+  <section class="map-custom-overlay">
+    <ion-searchbar
+      [(ngModel)]="formatted_address"
+      (ionChange)="searchLocation($event)"
+      searchIcon="md-car-location"
+      placeholder="Enter your vehicle location?"
+      debounce="300"
+      class="map-search"
+    ></ion-searchbar>
+
+    <div *ngIf="suggestions.length">
+      <ion-list lines="none">
+        <ion-item
+          button="true"
+          *ngFor="let sug of suggestions"
+          (click)="selectSuggestion(sug)"
+        >
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label class="ion-text-wrap"
+            >{{ sug.formatted_address }}</ion-label
+          >
+        </ion-item>
+      </ion-list>
+    </div>
+  </section>
+</ion-content>
+<ion-footer mode="ios" translucent="true">
+  <ion-row class="ion-padding-start ion-padding-end">
+    <ion-col size="3">
+      <ion-button
+        (click)="back()"
+        color="dark"
+        expand="block"
+        class="cars-btn"
+      >
+        <ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="9">
+      <ion-button
+        (click)="next()"
+        expand="block"
+        fill="solid"
+        [disabled]="!userLocation"
+      >
+        Next
+        <ion-icon name="md-arrow-forward" slot="end"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

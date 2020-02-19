@@ -1,0 +1,39 @@
+{
+    "arr": [
+        {
+            "id": "C1",
+            "group": "Micro/Hatch/Single Cab Ute",
+            "img": "assets/cars/micro.png"
+        },
+        {
+            "id": "C2",
+            "group": "Sedan/Coupe/Ute Etra Cab",
+            "img": "assets/cars/coupe.png"
+        },
+        {
+            "id": "C3",
+            "group": "CUV/SUV/Wagon/Dual Ute",
+            "img": "assets/cars/suv_cuv.png"
+        },
+        {
+            "id": "C4",
+            "group": "Pickup/Mini Truck/4WD 7 Seater",
+            "img": "assets/cars/pickup_truck.png"
+        },
+        {
+            "id": "C5",
+            "group": "Truck/Big Truck",
+            "img": "assets/cars/truck.png"
+        },
+        {
+            "id": "C6",
+            "group": "Van/Hiace/Commercial Van",
+            "img": "assets/cars/van.png"
+        },
+        {
+            "id": "C7",
+            "group": "Bus/Campvan",
+            "img": "assets/cars/coaster.png"
+        }
+    ]
+}

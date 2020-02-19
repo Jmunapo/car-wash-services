@@ -1,0 +1,40 @@
+.main {
+  height: 100%;
+  width: 100%;
+  padding-top: 56px;
+  background-color: var(--custom-dark);
+
+  ion-list {
+    padding-bottom: unset;
+    ion-item {
+      --min-height: 56px;
+    }
+
+    .signin-btn {
+      font-weight: bold;
+      text-transform: unset;
+    }
+  }
+  .btn-grid {
+    ion-button {
+      text-transform: unset;
+    }
+  }
+  .links {
+    z-index: 99;
+  }
+}
+
+.loader {
+  height: 100%;
+  width: 100%;
+  background-color: var(--custom-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h2 {
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+  }
+}

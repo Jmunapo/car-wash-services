@@ -1,0 +1,53 @@
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .loading {
+    display: flex;
+    align-items: center;
+    span {
+      font-weight: lighter;
+    }
+  }
+}
+.cus-title {
+  font-size: 14px;
+  font-weight: 700;
+  &.date {
+    color: var(--ion-color-primary);
+  }
+}
+
+.cus-slot {
+  font-weight: normal;
+}
+
+.service-name {
+  font-size: 16px;
+}
+
+.status {
+  font-size: 14px;
+}
+
+.p_number {
+  display: inline-block;
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 6px;
+  padding: 0 5px;
+  margin-left: 5px;
+}
+
+ion-label {
+  margin: 0px !important;
+}
+
+ion-item {
+  --min-height: 28px;
+}
+
+ion-icon:not(.more) {
+  margin-right: 16px;
+}

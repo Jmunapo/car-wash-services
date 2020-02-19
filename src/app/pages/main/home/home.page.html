@@ -1,0 +1,36 @@
+<ion-content>
+  <img class="app-logo" src="assets/img/app_logo.png" alt="" />
+  <section class="main-sec">
+    <div class="img-bg"></div>
+    <div class="welcome ion-padding-start ion-padding-end">
+      <h2 class="ion-no-margin ion-text-wrap">
+        Hello, <strong>{{user.displayName}}</strong>
+      </h2>
+      <p>What can we do for your car today?</p>
+    </div>
+  </section>
+  <section class="services ion-margin">
+    <ion-card
+      *ngFor="let service of services"
+      (click)="requestService(service)"
+      class="ion-activatable"
+    >
+      <ion-item lines="none">
+        <ion-icon [name]="service.icon" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap">
+          <h2 class="service-name">{{ service.name }}</h2>
+          <ion-note class="s_text">{{ service.text }}</ion-note>
+        </ion-label>
+        <!-- <ion-button fill="clear" slot="end"> -->
+        <ion-icon
+          color="primary"
+          class="ion-margin-end"
+          name="md-tm-arrow"
+          slot="end"
+        ></ion-icon>
+        <!-- </ion-button> -->
+      </ion-item>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card>
+  </section>
+</ion-content>

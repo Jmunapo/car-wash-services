@@ -1,0 +1,65 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="main/cars"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Vehicle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="add-v ion-margin">
+    <form [formGroup]="saveCarForm" (ngSubmit)="save(saveCarForm.value)">
+      <ion-list lines="none">
+        <ion-list-header>
+          Select your vehicle type
+        </ion-list-header>
+        <ion-slides [options]="slideOpts" #cars>
+          <ion-slide *ngFor="let model of models" (click)="selectModel(model)">
+            <ion-card
+              class="car-models"
+              [class.brd-primary]="selected === model.id"
+            >
+              <img [src]="model.img" />
+              <ion-card-content>{{ model.group }}</ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+        <ion-item>
+          <ion-icon name="md-cars" slot="start"></ion-icon>
+          <ion-label position="floating">
+            Make & Model
+            <small>(e.g Toyota Land Rover Range Velar)</small>
+          </ion-label>
+          <ion-input formControlName="model_make"></ion-input>
+        </ion-item>
+        <ion-input
+          formControlName="type"
+          type="text"
+          class="hidden"
+        ></ion-input>
+        <ion-item>
+          <ion-icon name="md-plate-number" slot="start"></ion-icon>
+          <ion-label position="floating">Plate Number</ion-label>
+          <ion-input
+            onkeyup="this.value = this.value.toUpperCase();"
+            class="ion-text-uppercase"
+            formControlName="plate_number"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button
+        type="submit"
+        color="primary"
+        expand="block"
+        fill="outline"
+        class="ion-no-margin"
+        [disabled]="!saveCarForm.valid"
+      >
+        <ion-icon slot="start" name="save"></ion-icon>
+        Save Car
+      </ion-button>
+    </form>
+  </section>
+</ion-content>

@@ -1,0 +1,190 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="map"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Schedule Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section *ngIf="loading" class="loader ion-no-margin">
+    <div class="loading ion-text-center">
+      <div class="loading ion-text-center">
+        <img width="30px" src="assets/img/loader.svg" />
+        <span *ngIf="action">{{action}}</span>
+      </div>
+    </div>
+  </section>
+
+  <section *ngIf="!loading" class="schedule ion-margin">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-note class="val-title">Service</ion-note>
+        <p class="user-value">
+          {{ service.service_name }}
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <ion-note class="val-title">Vehicle Location</ion-note>
+        <p class="user-value">
+          {{ service.location?.formatted_address }}
+        </p>
+      </ion-label>
+      <!--TODO make address editable <ion-button slot="end" fill="clear">
+        <ion-icon slot="icon-only" name="md-create"></ion-icon>
+      </ion-button> -->
+    </ion-item>
+
+    <ion-label class="input-title ion-margin-start ion-padding-top">
+      Select Vehicle <small>you can select multiple</small>
+    </ion-label>
+
+    <ion-slides [options]="slideOpts" #cars>
+      <ion-slide *ngFor="let car of user_cars" (click)="selectCar(car)">
+        <ion-card class="user-cars" [class.brd-primary]="carSelected(car)">
+          <img [src]="getImage(car.type)" />
+          <ion-card-content>
+            <div class="car_det ion-margin-top ion-text-left">
+              <h2 class="v_name">{{ car.model_make }}</h2>
+              <span class="p_number">{{ car.plate_number }}</span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card
+          (click)="addCar()"
+          class="user-cars ion-padding-top ion-activatable"
+        >
+          <img src="assets/img/add_car.png" />
+          <ion-card-content class="add-v">
+            <h2 class="add_name">Add Vehicle</h2>
+          </ion-card-content>
+          <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-label class="input-title ion-margin-start ion-padding-top">
+      Select date to start
+    </ion-label>
+    <ion-grid>
+      <ion-row class="ion-text-center">
+        <ion-col size="2">
+          <ion-button
+            size="small"
+            fill="clear"
+            class="default"
+            (click)="getSlider(dateSlider, 1)"
+          >
+            <ion-icon name="ios-arrow-back" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="8">
+          <ion-slides
+            (ionSlideDidChange)="changeDates(daysSlider, dateSlider)"
+            [options]="dateSlideOpts"
+            #dateSlider
+          >
+            <ion-slide *ngFor="let month of months">
+              <h2 class="ion-no-margin month-slider">
+                {{ month.month }}, {{ month.year }}
+              </h2>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button
+            (click)="getSlider(dateSlider, 2)"
+            size="small"
+            fill="clear"
+            class="default"
+          >
+            <ion-icon name="ios-arrow-forward" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-margin-bottom">
+      <ion-slides [options]="daysSlidesOpts" #daysSlider>
+        <ion-slide *ngFor="let day of days">
+          <ion-card
+            (click)="selectDate(day, dateSlider)"
+            class="days-card"
+            [class.brd-primary]="selectedDate === day.day + '-' + day.date"
+          >
+            <p>{{ day.day }}</p>
+            <h2>{{ day.date }}</h2>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <ion-item lines="none" class="time-slot-input">
+      <ion-label>Time Slot</ion-label>
+      <ion-select
+        [(ngModel)]="time_slot"
+        interface="popover"
+        placeholder="Select"
+        cancelText="Cancel"
+      >
+        <ion-select-option *ngFor="let time of timeSlot" [value]="time.from">
+          {{ time.from }} - {{ time.to }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none" class="time-slot-input">
+      <ion-label>Number of Weeks</ion-label>
+      <ion-select
+        [(ngModel)]="weeks"
+        interface="popover"
+        cancelText="Cancel"
+        (ionChange)="showPrice()"
+      >
+        <ion-select-option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [value]="i">
+          {{i}} {{i === 1? "Week" : "Weeks"}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </section>
+</ion-content>
+
+<ion-footer *ngIf="!loading" mode="ios" translucent="true">
+  <ion-row class="ion-padding-start ion-padding-end">
+    <ion-col size="3" class="price-area ion-text-center">
+      <ion-button
+        class="price-btn"
+        expand="block"
+        fill="clear"
+        color="light"
+        disabled="true"
+      >
+        £{{ price }}
+      </ion-button>
+    </ion-col>
+    <ion-col size="9">
+      <ion-button
+        *ngIf="!editing"
+        [disabled]="!scheduledDate || !selectedVehicles.length || !time_slot || !price"
+        expand="block"
+        class="cars-btn"
+        (click)="finish()"
+      >
+        Finish
+      </ion-button>
+      <ion-button
+        *ngIf="editing"
+        expand="block"
+        class="cars-btn"
+        (click)="finish()"
+      >
+        Finish
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

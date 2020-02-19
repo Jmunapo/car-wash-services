@@ -1,0 +1,75 @@
+<ion-content>
+  <section *ngIf="signing_in" class="loader ion-no-margin">
+    <div class="loading ion-text-center">
+      <p><ion-spinner name="crescent"></ion-spinner> Signing In...</p>
+    </div>
+  </section>
+  <section *ngIf="!signing_in" class="main ion-no-margin">
+    <div class="form ion-padding">
+      <ion-card class="ion-no-margin">
+        <ion-card-header>
+          <h2>Welcome Back</h2>
+        </ion-card-header>
+        <form
+          [formGroup]="signInForm"
+          (ngSubmit)="signIn(signInForm.value)"
+          class="login-form ion-margin"
+        >
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Email</ion-label>
+              <ion-input
+                formControlName="email"
+                placeholder="you@domain.com"
+                type="email"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Password</ion-label>
+              <ion-input
+                formControlName="password"
+                placeholder="Enter your password"
+                type="password"
+              ></ion-input>
+            </ion-item>
+            <ion-button
+              fill="clear"
+              class="ion-no-margin signin-btn"
+              expand="full"
+              type="submit"
+            >
+              Sign In
+            </ion-button>
+          </ion-list>
+        </form>
+      </ion-card>
+
+      <ion-grid class="btn-grid">
+        <ion-row>
+          <ion-col size="6">
+            <ion-button
+              routerLink="/auth/reset"
+              routerDirection="forward"
+              class="default"
+              fill="clear"
+              expand="full"
+            >
+              Forgot password?
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button
+              routerLink="/auth/register"
+              routerDirection="forward"
+              class="default"
+              fill="clear"
+              expand="full"
+            >
+              New user? Sign Up
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </section>
+</ion-content>

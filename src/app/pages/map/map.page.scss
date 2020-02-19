@@ -1,0 +1,39 @@
+ion-content {
+  position: relative;
+  .map-custom-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 16px;
+    background: var(--custom-dark);
+    border-radius: 15px;
+    min-height: 65px;
+    width: 90%;
+    margin: auto;
+    ion-searchbar {
+      --background: transparent;
+      background: transparent;
+      padding-inline-end: 0px !important;
+      width: 100%;
+    }
+    ion-list {
+      --background: transparent;
+      background: transparent;
+      margin: 0 15px;
+      ion-item {
+        --background: transparent;
+        margin-bottom: 5px;
+        --border-radius: 5px;
+        --min-height: 44px;
+        --ripple-color: var(--ion-color-primary);
+      }
+    }
+  }
+}
+
+ion-footer {
+  --background: transparent;
+  ion-row {
+    background: transparent !important;
+  }
+}

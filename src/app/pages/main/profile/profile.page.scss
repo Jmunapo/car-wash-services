@@ -1,0 +1,50 @@
+ion-item,
+ion-list {
+  --background: transparent;
+  background: transparent;
+}
+
+ion-label {
+  &:not(.danger) {
+    color: var(--ion-color-step-600) !important;
+  }
+  font-weight: normal;
+}
+
+ion-item {
+  --min-height: 56px;
+}
+
+.loader {
+  height: 100%;
+  width: 100%;
+  background-color: var(--ion-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .loading {
+    display: flex;
+    align-items: center;
+    span {
+      font-weight: lighter;
+    }
+  }
+}
+
+.username {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ion-color-light);
+}
+
+ion-list-header {
+  margin-top: 16px;
+}
+
+ion-item-divider {
+  ion-label {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--ion-color-light) !important;
+  }
+}

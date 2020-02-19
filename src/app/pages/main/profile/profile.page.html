@@ -1,0 +1,57 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section *ngIf="loading" class="loader ion-no-margin">
+    <div class="loading ion-text-center">
+      <div class="loading ion-text-center">
+        <img width="30px" src="assets/img/loader.svg" />
+        <span *ngIf="action">{{action}}</span>
+      </div>
+    </div>
+  </section>
+  <section *ngIf="!loading" class="main ion-no-margin">
+    <ion-list lines="full" class="ion-margin-top">
+      <ion-list-header>
+        <ion-label>
+          <ion-note>{{user.email}}</ion-note>
+          <h2 class="username">{{user.displayName}}</h2>
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item-divider>
+        <ion-label>
+          Account
+        </ion-label>
+      </ion-item-divider>
+      <ion-item button="true" (click)="enterPhone()">
+        <ion-label>
+          <h2>Phone Number</h2>
+          <p *ngIf="user.phoneNumber">{{user.phoneNumber}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item button="true" href="https://tnmservices.co.uk/privacy">
+        <ion-label>Privacy Policy</ion-label>
+      </ion-item>
+      <ion-item-divider>
+        <ion-label>
+          App
+        </ion-label>
+      </ion-item-divider>
+      <ion-item button="true" href="https://tnmservices.co.uk/help">
+        <ion-label>Help & Info</ion-label>
+      </ion-item>
+      <ion-item button="true" (click)="signOut()">
+        <ion-label class="danger" color="danger">Sign Out</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-note>TnM CarServices version: 0.0.1</ion-note>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </section>
+</ion-content>

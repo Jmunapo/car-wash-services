@@ -1,0 +1,99 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-title>Manage Vehicles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section *ngIf="loading" class="loader ion-no-margin">
+    <div class="loading ion-text-center">
+      <div class="loading ion-text-center">
+        <img width="30px" src="assets/img/loader.svg" />
+        <span *ngIf="action">{{action}}</span>
+      </div>
+    </div>
+  </section>
+  <section class="vehicles ion-margin-top" *ngIf="!loading && user_cars.length">
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let car of user_cars; let i = index">
+        <ion-card class="car-models ion-margin">
+          <img [src]="getImage(car.type)" />
+          <ion-card-content class="ion-text-left">
+            <div
+              class="car-services"
+              *ngIf="!car.services || !car.services.length"
+            >
+              <span class="tag no-service">
+                <ion-icon name="md-no-service"></ion-icon>
+                No Service
+              </span>
+            </div>
+
+            <div
+              class="car-services"
+              *ngIf="car.services && car.services.length"
+            >
+              <span color="success" class="tag service-av ion-text-capitalize">
+                {{car.services[0]}}
+              </span>
+            </div>
+
+            <hr class="hr" />
+            <div class="car_det">
+              <h2 class="v_name">{{ car.model_make }}</h2>
+              <span class="p_number">{{ car.plate_number }}</span>
+            </div>
+          </ion-card-content>
+
+          <ion-row class="ion-padding-start ion-padding-end">
+            <ion-col size="9">
+              <ion-button
+                (click)="editCar(car)"
+                color="dark"
+                expand="block"
+                class="cars-btn"
+              >
+                <ion-icon slot="start" name="md-create"></ion-icon>
+                Edit Vehicle
+              </ion-button>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button
+                (click)="deleteCar(car, i)"
+                expand="block"
+                color="danger"
+                fill="solid"
+              >
+                <ion-icon slot="icon-only" name="ios-trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </section>
+  <section class="empty-state" *ngIf="!user_cars.length && !loading">
+    <div class="info ion-text-center">
+      <img src="assets/img/garage.svg" />
+      <p class="ion-no-margin ion-margin-top">
+        Your garage is empty
+      </p>
+      <ion-note>Add vehicle to see them here</ion-note>
+    </div>
+  </section>
+  <section *ngIf="!loading">
+    <div class="ion-margin">
+      <ion-button
+        routerLink="add"
+        routerDirection="forward"
+        color="primary"
+        expand="block"
+        class="ion-no-margin"
+        class="cars-btn"
+      >
+        <ion-icon slot="start" name="md-add"></ion-icon>
+        Add Vehicle
+      </ion-button>
+    </div>
+  </section>
+</ion-content>

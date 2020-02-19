@@ -1,0 +1,28 @@
+.add-photo-btn {
+  --ripple-color: var(--custom-dark);
+  --background: var(--ion-item-background);
+  --border-radius: 0px;
+  margin: 0;
+}
+
+.hidden,
+.hidden > * {
+  height: 0px !important;
+  width: 0px !important;
+}
+
+ion-list {
+  background: transparent;
+  ion-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 0px;
+  }
+}
+ion-card-content {
+  min-height: 100px;
+  text-align: left;
+}
+.brd-primary {
+  border: 1px solid var(--ion-color-success);
+}

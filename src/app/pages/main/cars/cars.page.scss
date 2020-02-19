@@ -1,0 +1,65 @@
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-services {
+  margin-bottom: 16px;
+
+  .tag {
+    border-radius: 14px;
+
+    padding: 7px 15px;
+    ion-icon {
+      margin-right: 7px;
+      vertical-align: middle;
+      margin-bottom: 4px;
+    }
+
+    &.no-service {
+      background-color: var(--custom-danger);
+      color: var(--ion-color-danger);
+    }
+    &.service-av {
+      background-color: #10dc6030;
+      margin-right: 10px;
+      color: var(--ion-color-success);
+    }
+  }
+}
+
+.vehicles {
+  min-height: 400px;
+}
+
+.v_name {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.p_number {
+  display: inline-block;
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 6px;
+  padding: 0 5px;
+}
+.hr {
+  background-color: var(--ion-color-medium);
+}
+
+.cars-btn {
+  font-weight: bold;
+  text-transform: unset;
+}
+
+.empty-state {
+  img {
+    width: 45%;
+  }
+  p {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+}
